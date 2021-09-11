@@ -1,3 +1,4 @@
+package console_apps;
 
 public class HelloWorld {
 
