@@ -60,7 +60,7 @@ public class Product {
 		this.storage = storage;
 	}
 
-	public boolean isHasCellularConnectivity() {
+	public boolean hasCellularConnectivity() {
 		return hasCellularConnectivity;
 	}
 
@@ -84,6 +84,35 @@ public class Product {
 		this.discountValue = discountValue;
 	}
 	
+	public double getPrice(){
+		//local variable declarations
+		double price = 0.0;
+		
+		//computation
+		price = this.originalPrice - this.discountValue;
+		
+		//return
+		return price;
+	}
 	
+	//thi is an implicit method. so if p is an instance of product. The system.out.println(p) will print the following:
+	public String toString() {
+		String s = "";
+		
+//		StringBuilder sb = new StringBuilder();
+//		sb.append(model + " " +finish +" "+storage + "GB " + "(cellular connetivity: " + hasCellularConnectivity + "): $(" 
+//		+String.format("%.2f",  originalPrice) +" - "+ String.format("%.2f", discountValue) + ")");
+//		s = sb.toString();
+		
+		s+= model + " " +finish +" "+storage + "GB " + "(cellular connetivity: " + hasCellularConnectivity + "): $(" 
+		+String.format("%.2f",  originalPrice) +" - "+ String.format("%.2f", discountValue) + ")";
+		
+		//the s in %s refers to string. The d in %dGB refers to decimal number. 
+//		s = String.format("%s %s %dGB (cellular connectivity: %s): $(%.2f - %.2f)", 
+//				this.model, this.finish, this.storage, this.hasCellularConnectivity, this.originalPrice, this.discountValue);
+		
+		return s;
+		
+	}
 	
 }
