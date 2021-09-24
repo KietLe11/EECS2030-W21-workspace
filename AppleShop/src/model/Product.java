@@ -43,47 +43,37 @@ public class Product {
 	public void setModel(String model) {
 		this.model = model;
 	}
-
 	public String getFinish() {
 		return finish;
 	}
-
 	public void setFinish(String finish) {
 		this.finish = finish;
 	}
-
 	public int getStorage() {
 		return storage;
 	}
-
 	public void setStorage(int storage) {
 		this.storage = storage;
 	}
-
 	public boolean hasCellularConnectivity() {
 		return hasCellularConnectivity;
 	}
-
 	public void setHasCellularConnectivity(boolean hasCellularConnectivity) {
 		this.hasCellularConnectivity = hasCellularConnectivity;
 	}
-
 	public double getOriginalPrice() {
 		return originalPrice;
 	}
-
 	public void setOriginalPrice(double originalPrice) {
 		this.originalPrice = originalPrice;
 	}
-
 	public double getDiscountValue() {
 		return discountValue;
 	}
-
 	public void setDiscountValue(double discountValue) {
 		this.discountValue = discountValue;
 	}
-	
+
 	public double getPrice(){
 		//local variable declarations
 		double price = 0.0;
