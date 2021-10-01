@@ -4,13 +4,14 @@ public class Account {
 
 	private AppStore store;
 	private String name;
-	private String[] namesOfDownloadedApps = new String[50];
+	private String[] namesOfDownloadedApps;
 	//private int numberOfApps = this.store.getStableApps(0).length;
 	private App[] objectsOfDownloadedApps = new App[50];
 	private App[] downloadedApps = new App[50];
 	private AppStore[] stores;
 	private int numberOfStores;
 	private int numberOfDownloadedApps=0;
+	private int rating;
 	
 	/*
 	 * Status has different types:
@@ -52,23 +53,34 @@ public class Account {
 		else if(status.equals("downloadError")){
 			statusReturn = "Error: " +contextAppName+" has already been downloaded for "+ name+".";
 		}
+		else if(status.equals("ratingSubmitted")){
+			statusReturn = "Rating score "+this.rating+" of " +name+ " is successfully submitted for "+contextAppName+".";
+		}
+		else if(status.equals("uninstalled")){
+			statusReturn = contextAppName + " is successfully uninstalled for "+name+".";
+		}
 		return statusReturn;
 	}
 	
 	public String[] getNamesOfDownloadedApps() {
 		namesOfDownloadedApps = new String[numberOfDownloadedApps];
-		for(int i =0; i<numberOfDownloadedApps;i++) {
-//			namesOfDownloadedApps[i] = this.store.getApps()[i].getName();
-			namesOfDownloadedApps[i] = objectsOfDownloadedApps[i].getName();
+		if(numberOfDownloadedApps!=0) {
+			for(int i =0; i<numberOfDownloadedApps;i++) {
+				namesOfDownloadedApps[i] = this.getObjectsOfDownloadedApps()[i].getName();
+			}
 		}
+		
 		return namesOfDownloadedApps;
 	}
 	
 	public App[] getObjectsOfDownloadedApps() {
 		objectsOfDownloadedApps = new App[numberOfDownloadedApps];
-//		for(int i =0; i<numberOfDownloadedApps;i++) {
-//			objectsOfDownloadedApps[i] = this.store.getApps()[i];
-//		}
+		if(numberOfDownloadedApps!=0) {
+			for(int i =0; i<numberOfDownloadedApps;i++) {
+				objectsOfDownloadedApps[i] = downloadedApps[i];
+			}
+		}
+	
 		return objectsOfDownloadedApps;
 	}
 	
@@ -79,17 +91,18 @@ public class Account {
 		
 		
 		while(status.equals(("not installed for uninstall")) && counter<numberOfDownloadedApps){
-			if(objectsOfDownloadedApps[counter].getName().equals(appName)) {
-				status = "good";
+			if(this.getObjectsOfDownloadedApps()[counter].getName().equals(appName)) {
+				status = "uninstalled";
 				counter--;
 			}
 			counter++;
 		}
-		if(status.equals("good")) {
-			for(int i = counter; i<numberOfDownloadedApps; i++ ) {
-				objectsOfDownloadedApps[i] = objectsOfDownloadedApps[i+1];
+		if(status.equals("uninstalled")) {
+			for(int i = counter; i<numberOfDownloadedApps-1; i++ ) {
+				downloadedApps[i] = this.getObjectsOfDownloadedApps()[i+1];
 			}
-			objectsOfDownloadedApps[numberOfDownloadedApps-1]=null;
+			downloadedApps[numberOfDownloadedApps-1]=null;
+			numberOfDownloadedApps--;
 		}
 	}
 	
@@ -98,15 +111,16 @@ public class Account {
 		status = "not installed for rating";
 		int counter =0;
 		while(status.equals("not installed for rating") && counter<numberOfDownloadedApps){
-			if(objectsOfDownloadedApps[counter].getName().equals(appName)) {
-				status = "good";
+			if(this.getObjectsOfDownloadedApps()[counter].getName().equals(appName)) {
+				status = "ratingSubmitted";
 				counter--;
 			}
 			counter++;
 		}
 		
-		if(status.equals(appName)) {
+		if(status.equals("ratingSubmitted")) {
 			objectsOfDownloadedApps[counter].submitRating(rating);
+			this.rating = rating;
 		}
 	}
 	
@@ -119,17 +133,24 @@ public class Account {
 		contextAppName = appName;
 		
 		for(int i = 0; i<numberOfDownloadedApps; i++) {
-			if(this.getNamesOfDownloadedApps()[i].equals(appName)) {
+			if(this.getObjectsOfDownloadedApps()[i].getName().equals(appName)) {
 				status = "downloadError";
 			}
 		}
+		
+
 		if(numberOfDownloadedApps !=50 && !(status.equals("downloadError"))) {			
-			objectsOfDownloadedApps[numberOfDownloadedApps] = store.getApp(appName);
+			downloadedApps[numberOfDownloadedApps] = store.getApp(appName);
 			
 			numberOfDownloadedApps++;
 			
 			status = "download";
 		}
+//		if((store.getApp(appName) !=null) && !(status.equals("downloadError"))) {
+//			downloadedApps[numberOfDownloadedApps] = store.getApp(appName);
+//			numberOfDownloadedApps++;
+//			status = "download";
+//		}		
 	}
 	
 }

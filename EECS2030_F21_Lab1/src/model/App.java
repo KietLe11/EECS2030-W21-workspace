@@ -80,12 +80,15 @@ public class App {
 	}
 	
 	public String getRatingReport() {
-		if(numberOfLogs>0) {
+		if(numberOfRatings>0) {
 			
 			String report = "Average of " +numberOfRatings+ " ratings: " +String.format("%.1f", this.getAverageRatingDouble()) + " (Score 5: "+ratings[4]+", Score 4: "+ratings[3]+", Score 3: "+ratings[2]+", Score 2: " +ratings[1]+", Score 1: "+ratings[0]+")";
 			return report;
 		}
+		
 		return "No ratings submitted so far!";
+		
+		
 	}
 	
 	
