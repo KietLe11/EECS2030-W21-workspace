@@ -10,8 +10,9 @@ public class App {
 	
 	private Log[] log;
 	
-	private int numberOfLogs =0;
+	private int numberOfLogs;
 	private int maxNumberOfRatings;
+	
 	
 	int[] ratings;
 	
@@ -24,9 +25,9 @@ public class App {
 		//creating the ratings array and setting all the slots to zero
 		//each slot represents the number of ratings for each category: 1 star, 2 star, 3 star, 4 star, 5 star
 		ratings = new int[5];
-//		for(int i =0; 5>i; i++) {
-//			ratings[i]=0;
-//		}
+		
+		this.maxNumberOfRatings = maxNumberOfRatings;
+
 	}
 	
 	public String getName() {
@@ -36,7 +37,7 @@ public class App {
 	public String getWhatIsNew() {
 		
 		if(numberOfLogs!=0) {
-			String fixes = log[numberOfLogs-1].getFixes();
+			String fixes = log[numberOfLogs-1].toString();
 			return fixes;
 		}
 		else {
@@ -72,7 +73,7 @@ public class App {
 	
 	public double getAverageRatingDouble() {
 		if(ratings.length !=0) {
-			double average = (ratings[0] + 2*ratings[1] + 3*ratings[2]+ 4*ratings[3]+ 5*ratings[4])/numberOfRatings;
+			double average = (ratings[0] + 2*ratings[1] + 3*ratings[2]+ 4*ratings[3]+ 5*ratings[4])/(double)numberOfRatings;
 			return average;
 		}
 		return 0;
@@ -80,8 +81,8 @@ public class App {
 	
 	public String getRatingReport() {
 		if(numberOfLogs>0) {
-			double average = this.getAverageRatingDouble();
-			String report = "Average of " +numberOfRatings+ " ratings: " +average + " (Score 5: "+ratings[4]+", Score 4: "+ratings[3]+", Score 3: "+ratings[2]+", Score 2: " +ratings[1]+", Score 1: "+ratings[0]+")";
+			
+			String report = "Average of " +numberOfRatings+ " ratings: " +String.format("%.1f", this.getAverageRatingDouble()) + " (Score 5: "+ratings[4]+", Score 4: "+ratings[3]+", Score 3: "+ratings[2]+", Score 2: " +ratings[1]+", Score 1: "+ratings[0]+")";
 			return report;
 		}
 		return "No ratings submitted so far!";
@@ -99,6 +100,16 @@ public class App {
 		return info;
 	}
 	
+	public void releaseUpdate(String version) {
+		log[numberOfLogs] = new Log(version);
+		numberOfLogs++;
+	}
 	
+	public void submitRating(int rating) {
+		if(numberOfRatings<maxNumberOfRatings) {
+			ratings[rating-1]++;
+			numberOfRatings++;
+		}
+	}
 
 }

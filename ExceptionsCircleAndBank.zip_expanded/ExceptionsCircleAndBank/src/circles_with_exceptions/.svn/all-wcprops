@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 153
+/repos/jackie/!svn/ver/584/lassonde/teaching/courses/slides/2019/F/EECS2030/workspace-examples/ExampleExceptionsCircleAndBank/src/circles_with_exceptions
+END
+Circle.java
+K 25
+svn:wc:ra_dav:version-url
+V 165
+/repos/jackie/!svn/ver/584/lassonde/teaching/courses/slides/2019/F/EECS2030/workspace-examples/ExampleExceptionsCircleAndBank/src/circles_with_exceptions/Circle.java
+END
+CircleCalculator1.java
+K 25
+svn:wc:ra_dav:version-url
+V 176
+/repos/jackie/!svn/ver/584/lassonde/teaching/courses/slides/2019/F/EECS2030/workspace-examples/ExampleExceptionsCircleAndBank/src/circles_with_exceptions/CircleCalculator1.java
+END
+CircleCalculator2.java
+K 25
+svn:wc:ra_dav:version-url
+V 176
+/repos/jackie/!svn/ver/584/lassonde/teaching/courses/slides/2019/F/EECS2030/workspace-examples/ExampleExceptionsCircleAndBank/src/circles_with_exceptions/CircleCalculator2.java
+END
+InvalidRadiusException.java
+K 25
+svn:wc:ra_dav:version-url
+V 181
+/repos/jackie/!svn/ver/584/lassonde/teaching/courses/slides/2019/F/EECS2030/workspace-examples/ExampleExceptionsCircleAndBank/src/circles_with_exceptions/InvalidRadiusException.java
+END
