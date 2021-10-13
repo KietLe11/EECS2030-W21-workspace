@@ -3,6 +3,7 @@ package console_apps;
 import java.util.Scanner;
 
 import model.Product;
+import model.RefurbishedStore;
 
 public class ProductApp {
 
@@ -23,6 +24,13 @@ public class ProductApp {
 //		double originalPrice = input.nextDouble();
 //		Product p3 = new Product(model, originalPrice);
 //		System.out.println(p3);
+		
+		RefurbishedStore rs = new RefurbishedStore();
+		boolean b = false;
+		for(int i = 1; rs.getNumberOfEntries()>i;i++ ) {
+			b = b && rs.getPrivateEntriesArray()[i].getProduct() == null;
+		}
+		assertTrue(b);
 		
 		input.close();
 	}

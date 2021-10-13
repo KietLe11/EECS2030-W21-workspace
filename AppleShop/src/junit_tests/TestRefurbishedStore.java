@@ -177,5 +177,15 @@ public class TestRefurbishedStore {
 		assertTrue(rs.getSpaceGreyPro().length ==1);
 		assertTrue(rs.getSpaceGreyPro()[0].equals("F9FDN4NKQ1GC"));
 	}
+	
+	@Test
+	public void test_refurbished_store_4(){
+		RefurbishedStore rs = new RefurbishedStore();
+		boolean b = false;
+		for(int i = 1; rs.getNumberOfEntries()>i;i++ ) {
+			b = b && rs.getPrivateEntriesArray()[i].getProduct() == null;
+		}
+		assertTrue(b);
+	}
 
 }

@@ -25,7 +25,7 @@ public class Bank {
 				// From the method call below
 				// we have Bank.withdrawFrom being 
 				// the caller of Account.withdraw
-				accounts[i].withdraw(a);
+				accounts[i].withdraw(a); //exception should be thrown here if the withdraw amount is invalid
 			}
 		}
 	}

@@ -17,12 +17,12 @@ public class Circle {
 	//              an InvalidRadius Exception is thrown.
 	//              This option means we do not handle this
 	//              error, and propogates to the caller.
-	void setRadius(double r) throws InvalidRadiusException {
-		if(r < 0) {
+	void setRadius(double r) throws InvalidRadiusException { // the "throws InvalidRadiusException" in this line tells tells the caller whether to catch the exception or specify it
+		if(r < 0) {											// this method may throw an exception if the parameters are met
 			// We throw an exception object back to the caller,
 			// which is CircleCalculator.main, and it
 			// cannot be ignored.
-			throw new InvalidRadiusException("Invalid radius");
+			throw new InvalidRadiusException("Invalid radius"); //Where Exception originates from. 
 		}
 		else {
 			this.radius = r;

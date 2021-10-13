@@ -18,7 +18,7 @@ public class Account {
 	// the exception is thrown, we choose the specify option.
 	void withdraw(double a) throws InvalidTransactionException {
 		if(a < 0 || balance < a) {
-			throw new InvalidTransactionException("Amount negative or too large.");
+			throw new InvalidTransactionException("Amount negative or too large."); //this is where the exception originated
 		}
 		else {
 			balance -= a;
