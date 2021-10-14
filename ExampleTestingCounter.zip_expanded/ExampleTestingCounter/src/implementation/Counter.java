@@ -41,7 +41,7 @@ public class Counter {
 		 * 	Line 18 (right before the inner catch block):
 		 * 		"Error: ValueTooLargeException was NOT thrown as expected." 
 		 */
-		if(this.value == Counter.MAX_VALUE) {
+		if(this.value > Counter.MAX_VALUE) {
 			throw new ValueTooLargeException("Too large to increment");
 		}
 		else { 
@@ -59,7 +59,7 @@ public class Counter {
 		 * 	Line 12 (right before the catch block) 
 		 * 		"Error: ValueTooSmallException NOT thrown as expected." 
 		 */
-		if(this.value < Counter.MIN_VALUE) {
+		if(this.value == Counter.MIN_VALUE) {
 			throw new ValueTooSmallException("Too small to increment");
 		}
 		else { 
