@@ -1,5 +1,7 @@
 package model;
 
+import model.*;
+
 public class VaccinationSite {
 
 	public String location;
@@ -24,7 +26,7 @@ public class VaccinationSite {
 	private HealthRecord[] appointments;
 	private int numOfAppointments;
 	private int vaccineReserved;
-	public int numAdministered;
+	public int numAdministered = 0;
 
 	public VaccinationSite(String location, int limitDosesAdded) {
 		this.location = location;
@@ -130,7 +132,7 @@ public class VaccinationSite {
 		if(vax.codename.equals("mRNA-1273")) {
 			if(!modernaAdded) {
 				for(int i =0; i<4;i++) {
-					if(orderOfDosesAdded[i]==null) {
+					if(orderOfDosesAdded[i]==null ||orderOfDosesAdded[i].equals("Moderna")) {
 						orderOfDosesAdded[i] = "Moderna";
 						numOfTypesAdded++;
 						modernaAdded = true;
@@ -144,7 +146,7 @@ public class VaccinationSite {
 		else if(vax.codename.equals("BNT162b2")) {
 			if(!pfizerAdded) {
 				for(int i =0; i<4;i++) {
-					if(orderOfDosesAdded[i]==null) {
+					if(orderOfDosesAdded[i]==null  ||orderOfDosesAdded[i].equals("Pfizer")) {
 						orderOfDosesAdded[i] = "Pfizer";
 						numOfTypesAdded++;
 						pfizerAdded = true;
@@ -158,7 +160,7 @@ public class VaccinationSite {
 		else if(vax.codename.equals("Ad26.COV2.S")) {
 			if(!janssenAdded) {
 				for(int i =0; i<4;i++) {
-					if(orderOfDosesAdded[i]==null) {
+					if(orderOfDosesAdded[i]==null  ||orderOfDosesAdded[i].equals("Janssen")) {
 						orderOfDosesAdded[i] = "Janssen";
 						numOfTypesAdded++;
 						janssenAdded = true;
@@ -172,7 +174,7 @@ public class VaccinationSite {
 		else if(vax.codename.equals("AZD1222")) {
 			if(!astraAdded) {
 				for(int i =0; i<4;i++) {
-					if(orderOfDosesAdded[i]==null) {
+					if(orderOfDosesAdded[i]==null||orderOfDosesAdded[i].equals("Astra")) {
 						orderOfDosesAdded[i] = "Astra";
 						numOfTypesAdded++;
 						astraAdded = true;
@@ -214,40 +216,166 @@ public class VaccinationSite {
 	}
 
 	public void administer(String date) {
-		appointments[numAdministered].numDosesReceived++;
-		appointments[numAdministered].numAppointments--;
-		appointments[appointments[numAdministered].numDosesReceived].date[numAdministered] = date;
-		appointments[numAdministered].numDosesReceived++;
-		numAdministered++;
-
-		for(int i = 0; i<numOfTypesAdded;i++) {
-			if(orderOfDosesAdded[i]!=null) {
-				if(orderOfDosesAdded[i].equals("Moderna")) {
-					if(totalModerna>0) {
-						totalModerna--;
-						break;
+		
+		int doseCounter = 0;
+		
+		for(int numAdministered =0; numAdministered<numOfAppointments;numAdministered++) {
+			
+			int dosesTaken = appointments[numAdministered].numDosesReceived;
+			
+			appointments[numAdministered].numAppointments --;
+			appointments[numAdministered].numDosesReceived ++;
+			appointments[numAdministered].date[dosesTaken] = date;
+			appointments[numAdministered].numAppointments--;
+			appointments[numAdministered].location[dosesTaken]= this.location;
+			
+			int limit = vaccineReserved*4 - doseCounter*4+1;
+			
+			for(int i = 0; i<limit;i++) {
+				if(orderOfDosesAdded[doseCounter]!=null) {
+					if(orderOfDosesAdded[doseCounter].equals("Moderna")) {
+						if(totalModerna ==0) {
+							doseCounter++;
+						}
+						if(totalModerna>0) {
+							totalModerna--;
+							
+							appointments[numAdministered].vax[dosesTaken] = new Vaccine("mRNA-1273", "RNA", "Moderna");
+							if(totalModerna ==0) {
+								doseCounter++;
+							}
+							break;
+						}
+						
 					}
-				}
-				else if(orderOfDosesAdded[i].equals("Pfizer")) {
-					if(totalPfizer>0) {
-						totalPfizer--;
-						break;
+					else if(orderOfDosesAdded[doseCounter].equals("Pfizer")) {
+						if(totalPfizer ==0) {
+							doseCounter++;
+						}
+						
+						if(totalPfizer>0) {
+							totalPfizer--;
+							
+							appointments[numAdministered].vax[dosesTaken] = new Vaccine("BNT162b2", "RNA", "Pfizer/BioNTech");
+							
+							if(totalPfizer ==0) {
+								doseCounter++;
+							}
+							break;
+						}
+						
 					}
-				}
-				else if(orderOfDosesAdded[i].equals("Astra")) {
-					if(totalAstra>0) {
-						totalAstra--;
-						break;
+					else if(orderOfDosesAdded[doseCounter].equals("Astra")) {
+						
+						if(totalAstra ==0) {
+							doseCounter++;
+						}
+						if(totalAstra>0) {
+							totalAstra--;
+							
+							appointments[numAdministered].vax[dosesTaken] = new Vaccine("AZD1222", "Non Replicating Viral Vector", "Oxford/AstraZeneca");
+							
+							if(totalAstra ==0) {
+								doseCounter++;
+							}
+							break;
+						}
+						
 					}
-				}
-				else if(orderOfDosesAdded[i].equals("Janssen")) {
-					if(totalJanssen>0) {
-						totalJanssen--;
-						break;
+					else if(orderOfDosesAdded[doseCounter].equals("Janssen")) {
+						
+						if(totalJanssen ==0) {
+							doseCounter++;
+						}
+						if(totalJanssen>0) {
+							totalJanssen--;
+							
+							appointments[numAdministered].vax[dosesTaken] = new Vaccine("Ad26.COV2.S", "Non Replicating Viral Vector", "Janssen");
+							
+							if(totalJanssen ==0) {
+								doseCounter++;
+							}
+							break;
+						}
 					}
 				}
 			}
+			
+//			if(orderOfDosesAdded[doseCounter]!=null) {
+//				if(orderOfDosesAdded[doseCounter].equals("Moderna")) {
+//					if(totalModerna ==0) {
+//						doseCounter++;
+//					}
+//					if(totalModerna>0) {
+//						totalModerna--;
+//						
+//						appointments[numAdministered].vax[dosesTaken] = new Vaccine("mRNA-1273", "RNA", "Moderna");
+//						if(totalModerna ==0) {
+//							doseCounter++;
+//						}
+//					}
+//				}
+//				else if(orderOfDosesAdded[doseCounter].equals("Pfizer")) {
+//					if(totalPfizer ==0) {
+//						doseCounter++;
+//					}
+//					
+//					if(totalPfizer>0) {
+//						totalPfizer--;
+//						
+//						appointments[numAdministered].vax[dosesTaken] = new Vaccine("BNT162b2", "RNA", "Pfizer/BioNTech");
+//						
+//						if(totalPfizer ==0) {
+//							doseCounter++;
+//						}
+//					}
+//				}
+//				else if(orderOfDosesAdded[doseCounter].equals("Astra")) {
+//					
+//					if(totalAstra ==0) {
+//						doseCounter++;
+//					}
+//					if(totalAstra>0) {
+//						totalAstra--;
+//						
+//						appointments[numAdministered].vax[dosesTaken] = new Vaccine("AZD1222", "Non Replicating Viral Vector", "Oxford/AstraZeneca");
+//						
+//						if(totalAstra ==0) {
+//							doseCounter++;
+//						}
+//					}
+//				}
+//				else if(orderOfDosesAdded[doseCounter].equals("Janssen")) {
+//					
+//					if(totalJanssen ==0) {
+//						doseCounter++;
+//					}
+//					if(totalJanssen>0) {
+//						totalJanssen--;
+//						
+//						appointments[numAdministered].vax[dosesTaken] = new Vaccine("Ad26.COV2.S", "Non Replicating Viral Vector", "Janssen");
+//						
+//						if(totalJanssen ==0) {
+//							doseCounter++;
+//						}
+//					}
+//				}
+//			}
 		}
+		
+//		appointments[numAdministered].numDosesReceived = numOfAppointments;
+//		
+//		appointments[appointments[numAdministered].numDosesReceived].date[numAdministered] = date;
+//		appointments[numAdministered].numDosesReceived++;
+//		numAdministered++;
+
+//		for(int i = 0; i<numOfAppointments;i++) {
+//			
+//		}
+		
+		totalDosesAvailable -= numOfAppointments;
+		vaccineReserved-=numOfAppointments;
+		numOfAppointments=0;
 
 	}
 }

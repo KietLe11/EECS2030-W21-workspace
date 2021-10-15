@@ -41,7 +41,7 @@ public class Counter {
 		 * 	Line 18 (right before the inner catch block):
 		 * 		"Error: ValueTooLargeException was NOT thrown as expected." 
 		 */
-		if(this.value > Counter.MAX_VALUE) {
+		if(this.value == Counter.MAX_VALUE) {
 			throw new ValueTooLargeException("Too large to increment");
 		}
 		else { 
