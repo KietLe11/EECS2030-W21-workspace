@@ -33,6 +33,20 @@ public class Floor {
 		
 	}
 	
+	public Floor(Floor floorCopy) {
+		this.maxCapacity = floorCopy.getMaxCap();
+		this.utilizedSpace = floorCopy.utilizedSpace;
+		this.availableSpace = floorCopy.availableSpace;
+		this.units = floorCopy.units;
+		this.nou = floorCopy.nou;
+		
+		this.areasOfMasters = floorCopy.areasOfMasters;
+		this.areasOfKitchens = floorCopy.areasOfKitchens;
+		this.areasOfOffices = floorCopy.areasOfOffices;
+		
+		this.numberOfEachFunction = floorCopy.numberOfEachFunction;
+	}
+	
 	public String toString() {
 		String s = "";
 		s = String.format("Floor's utilized space is %d sq ft (%d sq ft remaining): [", utilizedSpace, availableSpace);
