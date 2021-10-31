@@ -119,4 +119,37 @@ public class TestCounter {
 			fail("ValueTooSmallException is thrown unexpectedly");
 		}
 	}
+	
+	@Test
+	public void testStuff() {
+		
+		Counter c = new Counter();
+		
+		try {
+			
+			for(int i =1; i<4; i++) {
+				c.increment();
+				assertEquals(i, c.getValue());
+			}
+			
+		}
+		catch(ValueTooLargeException e) {
+			fail("unexpected exception");
+		}
+		
+		try {
+			
+			for(int i=1; i<4;i++) {
+				c.decrement();
+				assertEquals(3-i, c.getValue());
+			}
+			
+		}
+		catch(ValueTooSmallException e) {
+			//expected 
+		}
+		
+		
+		
+	}
 }

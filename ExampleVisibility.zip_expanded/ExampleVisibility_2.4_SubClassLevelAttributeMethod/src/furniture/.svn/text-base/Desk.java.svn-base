@@ -1,0 +1,12 @@
+package furniture;
+
+public class Desk {
+	void deskMethod() {
+		/* Within this method of a diffent resident class (but the same resident package) 
+		 * as of 'i' and 'm' from class Chair,
+		 * we can access any of them, since both 'i' and 'm' are declared as 'protected'.
+		 */
+		System.out.println(Chair.i);
+		Chair.m();
+	}
+}

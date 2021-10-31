@@ -651,4 +651,24 @@ public class StarterTests {
 		 * 	so that when appointments are administered, avaialble vaccines will be consumed in a different order accordingly.
 		 */
 	}
+	
+	@Test
+	public void additionalTest() {
+		
+		VaccinationSite vs = new VaccinationSite("Da Best Vaccines", 10);
+		
+		Vaccine v1 = new Vaccine("BestVaxx", "beyondVax", "Beyond Meat");
+		
+		try {
+			vs.addDistribution(v1, 3);
+		}
+		catch(UnrecognizedVaccineCodeNameException e) {
+			//expect to be thrown
+		}
+		catch(TooMuchDistributionException e ) {
+			fail("Too much vaccine distribution");
+		}
+	}
 } 
+
+	

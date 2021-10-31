@@ -1,0 +1,13 @@
+package shape;
+
+/*
+ * Since class Chair is decalred as 'public',
+ * it can be accessed within all classes (across packages) in its resident proejct.
+ */
+
+import furniture.Chair;
+
+@SuppressWarnings("unused")
+public class Square {
+	
+}
