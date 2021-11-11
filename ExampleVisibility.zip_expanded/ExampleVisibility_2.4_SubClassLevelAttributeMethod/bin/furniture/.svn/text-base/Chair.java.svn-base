@@ -1,0 +1,35 @@
+package furniture;
+
+
+public class Chair {
+	/* An attribute declared with modifier 'protected'
+	 * means that its value can only be accessed 
+	 * within methods of its resident class, i.e., Chair,
+	 * and any of its descendant classes, i.e., BubbleChair and RockingChair
+	 */
+	protected static int i; 
+	
+	/* A method declared with modifier 'protected'
+	 * means that it can only be called 
+	 * within methods of its resident class, i.e., Chair.
+	 * and any of its descendant classes, i.e., BubbleChair and RockingChair
+	 */
+	protected static void m() {}
+	
+	static void chairMethod() {
+		/* Within this method of the same resident class 
+		 * as of 'i' and 'm', 
+		 * we can access both 'i' and 'm'.
+		 * Notice that the visibility of this USER method chairMethod is IRRELEVANT:
+		 * it only depends on the visibility of the attribute or method BEING USED.
+		 */
+		System.out.println(Chair.i);
+		Chair.m();
+		
+		/* Alternatively, since we are now in the same resident class
+		 * as of 'i' and 'm', we can ignroe resident class name 
+		 */
+		System.out.println(i);
+		m();
+	}
+}

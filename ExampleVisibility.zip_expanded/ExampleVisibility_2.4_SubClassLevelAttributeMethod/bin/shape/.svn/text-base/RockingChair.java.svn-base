@@ -1,0 +1,14 @@
+package shape;
+
+import furniture.Chair;
+
+public class RockingChair extends Chair {
+	void rockingChairMethod() {
+		/* Within this method of a descendant class (but different resident package) 
+		 * as of 'i' and 'm' from class Chair,
+		 * we can access any of them, since both 'i' and 'm' are declared as 'protected'.
+		 */
+		System.out.println(Chair.i);
+		Chair.m();
+	}
+}

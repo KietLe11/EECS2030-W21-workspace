@@ -1,0 +1,33 @@
+package furniture;
+
+
+public class Chair {
+	/* An attribute declared with modifier 'private'
+	 * means that its value can only be accessed 
+	 * within methods of its resident class, i.e., Chair.  
+	 */
+	private static int i;
+	
+	/* A method declared with modifier 'private'
+	 * means that it can only be called 
+	 * within methods of its resident class, i.e., Chair.  
+	 */
+	private static void m() {}
+	
+	static void chairMethod() {
+		/* Within this method of the same resident class 
+		 * as of 'i' and 'm', 
+		 * we can access both 'i' and 'm'.
+		 * Notice that the visibility of this USER method chairMethod is IRRELEVANT:
+		 * it only depends on the visibility of the attribute or method BEING USED.
+		 */
+		System.out.println(Chair.i);
+		Chair.m();
+		
+		/* Alternatively, since we are now in the same resident class
+		 * as of 'i' and 'm', we can ignroe resident class name 
+		 */
+		System.out.println(i);
+		m();
+	}
+}
