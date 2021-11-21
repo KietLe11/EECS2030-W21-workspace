@@ -17,11 +17,15 @@ public class Subscriber extends Follower{
 		return "Subscriber";
 	}
 	
+	public String getRecommendedVideos(int number){
+		return recommendedVideos[number];
+	}
+	
 	/*
 	 * Mutators
 	 */
 	public void recommendVid(String vidname) {
-		
+		recommendedVideos[norv]=vidname;
 		norv++;
 	}
 }

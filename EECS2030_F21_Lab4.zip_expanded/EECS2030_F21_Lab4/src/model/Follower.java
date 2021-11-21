@@ -72,9 +72,9 @@ public class Follower{
 			nof--;
 		}
 	}
-	public void recommendVid(String vidname) {
-		norv++;
-	}
+//	public void recommendVid(String vidname) {
+//		norv++;
+//	}
 
 	/*
 	 * Accessor
@@ -111,6 +111,23 @@ public class Follower{
 		}
 		else if(nof ==0 && norv==0 && type.equals("Subscriber")) {
 			stringToGo += "no channels and has no recommended videos.";
+		}
+		else if(nof !=0 && norv!=0 && type.equals("Subscriber")) {
+			stringToGo += "[";	
+			for(int i =0; i<nof; i++) {
+				stringToGo += channels[i].getName();
+				if(!(i==nof-1)) {
+					stringToGo += ", ";
+				}
+			}
+			stringToGo += "] and is recommended <";
+			for(int i = 0; i<norv;i++) {
+				stringToGo += ((Subscriber) this).recommendedVideos[i];
+				if(!(i==norv-1)) {
+					stringToGo+=", ";
+				}
+			}
+			stringToGo += ">.";
 		}
 		
 		else if(nof!=0 && type.equals("Monitor")) {
