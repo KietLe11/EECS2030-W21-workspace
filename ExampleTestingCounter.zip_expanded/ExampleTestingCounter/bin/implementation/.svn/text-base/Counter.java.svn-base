@@ -1,0 +1,53 @@
+package implementation;
+
+public class Counter {
+	/*
+	 * Global Constants for All Counter Objects
+	 */
+	public static final int MAX_VALUE = 3;  
+	public static final int MIN_VALUE = 0;
+	
+	/*
+	 * Implementation Attribute
+	 */
+	private int value;
+	
+	public int getValue() {
+		return this.value;
+	}
+	
+	/*
+	 * Constructor
+	 */
+	public Counter() {
+		this.value = MIN_VALUE;
+	}
+
+	/*
+	 * Mutators
+	 */
+	public void increment() throws ValueTooLargeException {
+		/*
+		 * Try how a wrong implementation can make the console tester
+		 * and JUnit tests fail:
+		 * if(this.value == Counter.MIN_VALUE) {
+		 * 	throw new ValueTooLargeException("Too large to increment");
+		 * } 
+		 */
+		if(this.value == Counter.MAX_VALUE) {
+			throw new ValueTooLargeException("Too large to increment");
+		}
+		else { 
+			value += 1; 
+		}
+	}
+	
+	public void decrement() throws ValueTooSmallException {
+		if(this.value == Counter.MIN_VALUE) {
+			throw new ValueTooSmallException("Too small to increment");
+		}
+		else { 
+			value -= 1; 
+		}
+	}
+}

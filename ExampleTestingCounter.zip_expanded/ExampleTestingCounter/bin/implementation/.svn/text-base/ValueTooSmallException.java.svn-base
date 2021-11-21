@@ -1,0 +1,7 @@
+package implementation;
+
+public class ValueTooSmallException extends Exception {
+	public ValueTooSmallException(String s) {
+		super(s);
+	}
+}
