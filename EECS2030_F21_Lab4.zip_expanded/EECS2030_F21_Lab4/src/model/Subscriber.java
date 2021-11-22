@@ -28,4 +28,8 @@ public class Subscriber extends Follower{
 		recommendedVideos[norv]=vidname;
 		norv++;
 	}
+	
+	public void watch(String vidname, int minutes) {
+		
+	}
 }

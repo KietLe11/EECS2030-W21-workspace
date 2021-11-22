@@ -146,8 +146,6 @@ public class Follower{
 		else if(nof==0 && type.equals("Monitor")) {
 			stringToGo += "no channels.";
 		}
-		
-		
 		return stringToGo;
 	}
 	public String getName() {

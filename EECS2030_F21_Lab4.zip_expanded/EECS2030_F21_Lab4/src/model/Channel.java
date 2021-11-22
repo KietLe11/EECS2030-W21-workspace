@@ -4,12 +4,9 @@ package model;
 
 public class Channel {
 
-	private int maxFollowers;
-	private int maxVideos;
 	private String name;
 
 	private String stringToGo;
-	private String status;
 
 	private int numOfFollows;
 	private Follower[] followers;
@@ -18,13 +15,10 @@ public class Channel {
 	private int nov;
 
 	public Channel(String name, int maxFollowers, int maxVideos) {
-		this.maxFollowers = maxFollowers;
-		this.maxVideos = maxVideos;
 		this.name = name;
 
 		videoNames = new String[maxVideos];
 
-		status = "new";
 		followers = new Follower[maxFollowers];
 	}
 
@@ -130,7 +124,6 @@ public class Channel {
 	public void follow(Follower f) {
 		followers[numOfFollows] = f;
 		numOfFollows++;
-		status = "followers";
 		followers[numOfFollows-1].addChannel(this);
 	}
 	public void unfollow(Follower f) {
@@ -157,7 +150,6 @@ public class Channel {
 			}
 			numOfFollows --;
 			if(numOfFollows == 0) {
-				status = "no followers";
 			}
 			f.removeChannel(this);
 		}
