@@ -72,9 +72,6 @@ public class Follower{
 			nof--;
 		}
 	}
-//	public void recommendVid(String vidname) {
-//		norv++;
-//	}
 
 	/*
 	 * Accessor
@@ -129,23 +126,7 @@ public class Follower{
 			}
 			stringToGo += ">.";
 		}
-		
-		else if(nof!=0 && type.equals("Monitor")) {
-			stringToGo += "[";
-			
-			if(nof!=0) {
-				for(int i =0; i<nof; i++) {
-					stringToGo += channels[i].getName();
-					if(!(i==nof-1)) {
-						stringToGo += ", ";
-					}
-				}
-			}
-			stringToGo += "].";
-		}
-		else if(nof==0 && type.equals("Monitor")) {
-			stringToGo += "no channels.";
-		}
+
 		return stringToGo;
 	}
 	public String getName() {

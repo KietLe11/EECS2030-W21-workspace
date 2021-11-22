@@ -31,5 +31,21 @@ public class Subscriber extends Follower{
 	
 	public void watch(String vidname, int minutes) {
 		
+		boolean videoExist= false;
+		for(int i =0; i<norv;i++) {
+			if(recommendedVideos[i].equals(vidname)){
+				videoExist =true;
+				break;
+			}
+		}
+		
+		if(videoExist) {
+			for(int i = 0; i<nof;i++) {
+				if(channels[i].hasVideo(vidname)) {
+					channels[i].watchVideo(vidname, minutes);
+					break;
+				}
+			}
+		}
 	}
 }

@@ -106,6 +106,18 @@ public class Channel {
 		return name;
 	}
 	
+
+	public boolean hasVideo(String vidName) {
+		boolean truth = false;
+		for(int i=0; i<nov;i++) {
+			if(videoNames[i].equals(vidName)) {
+				truth = true;
+				break;
+			}
+		}
+		return truth;
+	}
+	 
 	/*
 	 * Mutators
 	 */
@@ -154,4 +166,25 @@ public class Channel {
 			f.removeChannel(this);
 		}
 	}
+	
+	public void watchVideo(String vidname, int watchTime) {
+		
+		boolean videoExist= false;
+		for(int i =0; i<nov;i++) {
+			if(videoNames[i].equals(vidname)){
+				videoExist =true;
+				break;
+			}
+		}
+		
+		if(videoExist) {
+			for(int i=0;i<numOfFollows;i++) {
+				if(followers[i] instanceof Monitor) {
+					((Monitor)followers[i]).updateMonitor(name, vidname, watchTime);
+				}
+			}
+		}
+	}
+	
+
 }
